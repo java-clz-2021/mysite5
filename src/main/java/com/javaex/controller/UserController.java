@@ -6,8 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.javaex.service.UserService;
 import com.javaex.vo.UserVo;
@@ -78,6 +81,20 @@ public class UserController {
 		return "user/joinOk";
 	}
 
+	
+	// 회원가입
+	@ResponseBody
+	@RequestMapping("/join2")
+	public int join2(@RequestBody UserVo userVo) {
+		System.out.println("[UserController.join()]");
+
+		// 서비스를 통해 회원정보 저장
+		int count = userService.joinUser(userVo);
+		return count;
+	}
+	
+	
+	
 	// 회원정보수정폼
 	@RequestMapping("/modifyForm")
 	public String modifyForm(Model model, HttpSession session) {
@@ -116,5 +133,16 @@ public class UserController {
 
 		return "redirect:/main";
 	}
-
+	
+	// id체크
+	@ResponseBody
+	@RequestMapping(value = "/idcheck", method = { RequestMethod.GET, RequestMethod.POST })
+	public boolean idCheck(@RequestParam("id") String id) {
+		System.out.println("[UserController.idcheck()]");
+		
+		boolean state = userService.getUser(id);
+		
+		return state;
+	}
+	
 }

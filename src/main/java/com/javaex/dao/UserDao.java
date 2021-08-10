@@ -43,4 +43,11 @@ public class UserDao {
 		return sqlSession.update("user.updateUser", userVo);
 	}
 
+	// 회원정보 가져오기 ->회원정보 수정폼
+	public UserVo selectUser(String id) {
+		System.out.println("[UserDao.selectUser()]");
+
+		return sqlSession.selectOne("user.selectUserById", id);
+	}
+	
 }

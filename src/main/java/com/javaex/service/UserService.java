@@ -46,5 +46,20 @@ public class UserService {
 		int count = userDao.updateUser(userVo);
 		return count;
 	}
+	
+	
+	//idCheck
+	public boolean getUser(String id) {
+		System.out.println("[UserService.getUser()]");
+		
+		UserVo userVo = userDao.selectUser(id);
+		
+		if(userVo == null) {// 아이디 조회 결과가 없으면 사용가능
+			return true;
+		}else { // 아이디 조회 결과가 있으면 사용가능
+			return false;
+		}
+		
+	}
 
 }
