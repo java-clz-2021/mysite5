@@ -97,3 +97,5 @@ WHERE  BO.user_no = US.no
 and  BO.title like '%1%'					 
 order by reg_date desc;
 						 
+
+test
